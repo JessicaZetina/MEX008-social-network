@@ -2,6 +2,7 @@ let Muro = {
     render: async () => {
         let view = /* html */ `  
 <div class="muroBox">
+    <li class="active" ><img src="../icon/FAVORITO.png"></li>
             <div class="slider">
                  <div class=slider-img>
                     <ul>
@@ -50,13 +51,13 @@ let Muro = {
                     console.error("Error adding document: ", error);
                 });
         })
-        //Tomara la data
+        //Función de fire base para tomar lo que se escribe en la sección para publicar
         db.collection("publicaciones")
             .onSnapshot(function (doc) {
             const arrayMensajes = doc.docs
            printMensajes(arrayMensajes)
             });
-        //Pintara la data
+        //Pintara los mensajes en la siguiente sección de las publicacines
             const printMensajes= (arrayMensajes)=> {
                 const containerPublicaciones= document.getElementById('containerPublicaciones')
                 let str= ""
@@ -64,13 +65,15 @@ let Muro = {
                    const pintarMensaje=mensaje.data();
                    console.log(pintarMensaje)
                    str += `
-                   <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                   <div class="card text-white bg-danger mb-3" style="max-width: 200rem;">
                     <div class="card-header">Nombre</div>
                     <div class="card-body">
                         <h5 class="card-title">Mensaje</h5>
                         <p class="card-text">${pintarMensaje.mensaje}</p>
-
+                        <button id="btn borrar" type="button" class="btn btn-info">borrar</button>
+                        <button id="btn editar" type="button" class="btn btn-info">editar</button>
                     </div>
+                    
                     </div>
                    `
                     });
@@ -79,3 +82,12 @@ let Muro = {
     }
 }
 export default Muro;
+
+
+        //db . colección ( "publicaciones" ). doc ( "DC" ). eliminar (). entonces ( 
+          //  function () {   
+            //const array     
+         //consola . log ( "¡Comentario eliminado con éxito!" ); 
+        //}). catch ( función ( error ) {     
+        //consola . error ( "Error al eliminar el documento:" , error ); 
+        //});
