@@ -16,7 +16,6 @@ let Navbar = {
         </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-             <li class="active"><img src="../icon/FAVORITO.png"></li>
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Selecciona tus Insignias <span class="caret"></span></a>
                 <ul class="dropdown-menu">
