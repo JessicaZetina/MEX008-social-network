@@ -1,78 +1,55 @@
-let Login = {
+let login = {
     render: async () => {
         let view = /* html */ `
          <div class="conteiner">
         
             <form class="login">
-            <!-- The surrounding HTML is left untouched by FirebaseUI.
-            Your app may use that space for branding, controls and other customizations.-->
-            <h1><img src="../icon/FAVORITO.png" alt="imagen-logo" id="logo"></h1>
-            <div id="loader">Login or sign up</div> <br>
-            <div id="firebaseui-auth-container"></div>
-            
         
-         </form>
+                <p><img src="https://github.com/JessicaZetina/MEX008-social-network/blob/master/icon/FAVORITO.png?raw=true" alt="imagen-logo" id="logo"></p>
+                    <h3 class="login-title">Registro de usuarios </h3> <br>
+                    <label class="login-label">Correo</label>
+                    <input class="login-input" id="email" type="email"  placeholder="wanderlust@gmail.com">
+                    <label class="login-label">Contraseña</label>
+                    <input class="login-input" id="password" type="password"  pattern=".{6,}" placeholder="contraseña"> <br><br>
+                    <button class="login-button" id="btn-registro">Registrarse</button> <br>
+​                   
+                    <div class="alerta" id="alertas"></div> 
+​
+                    <button class="login-button-google" id="google">Google</button> <br>
+                    
+                        
+                    <h3 class="login-title">Ingreso de usuarios </h3> <br>
+                    <label class="login-label">Correo </label>
+                    <input class="login-input"  id="email2" type="email"  placeholder="wanderlust@gmail.com">
+                    <label class="login-label">Contraseña</label>
+                    <input class="login-input" id="password2" type="password"  pattern=".{6,}" placeholder="contraseña"> <br><br>
+                    <button class="login-button" id="btn-ingreso">Ingreso</button>
+                    <div class="alerta2" id="alertas2"></div> 
+        
+            </form>
+            <div id="contenido"></div>
+​
         </div>
-        
+        </section> 
+        </main>
         `
         return view
     },
     after_render: async () => {
-        // Initialize Firebase
-        // firebase.initializeApp(firebaseConfig);
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        const btnRegistro = document.getElementById('btn-registro');
+        console.log(btnRegistro);
+        btnRegistro.addEventListener('click', registro)
+        
+        const btnIngreso = document.getElementById('btn-ingreso');
+        console.log(btnIngreso);
+        btnIngreso.addEventListener('click', ingreso)
 
-        // <!--registrarse-->
-        var uiConfig = {
-            callbacks: {
-                signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-                    // User successfully signed in.
-                    // Return type determines whether we continue the redirect automatically
-                    // or whether we leave that to developer to handle.
-                    return true;
-                },
-                uiShown: function () {
-                    // The widget is rendered.
-                    // Hide the loader.
-                    document.getElementById('loader').style.display = 'none';
-                }
-            },
-            // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-            signInFlow: 'popup',
-            signInSuccessUrl: './#/muro',
-            signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                firebase.auth.GithubAuthProvider.PROVIDER_ID,
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                firebase.auth.PhoneAuthProvider.PROVIDER_ID
-            ],
-            // Terms of service url.
-            tosUrl: '<your-tos-url>',
-            // Privacy policy url.
-            privacyPolicyUrl: '<your-privacy-policy-url>'
-        };
-
-        //Login con gmail
-        ui.start('#firebaseui-auth-container', {
-            signInOptions: [
-                // List of OAuth providers supported.
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                // firebase.auth.GithubAuthProvider.PROVIDER_ID
-            ],
-            // Other config options...
-        });
-
+        const btngoogle = document.getElementById('google');
+        console.log(btngoogle);
+        btngoogle.addEventListener('click', google)
     }
-}
-export default Login;
-
-
+};
+export default login;
 
 
 

@@ -1,3 +1,4 @@
+//SPA
 "use strict";
 
 import Navbar from './modules/navbar.js'
@@ -13,11 +14,11 @@ import Utils from './modules/utils.js'
 // Lista de rutas admitidas. Cualquier URL que no sea estas rutas arrojara un error 404
 
 const routes = {
-    '/login'      : Login
-    ,'/crear-perfil' : CrearPerfil
-    ,'/perfil' : Perfil
-    ,'/muro'      : Muro
-    
+    '/': Login,
+    '/login': Login,
+    '/crear-perfil' : CrearPerfil,
+    '/perfil' : Perfil,
+    '/muro': Muro
 };
 
 // El código del enrutador. Tome una URL, comprueba la lista de rutas surtidas y luego muestra  la página de contenido corespondiente
@@ -27,10 +28,6 @@ const router = async () => { //La función siempre devuelve una promesa
     const header  = document.getElementById('header-container'); 
     const content = null || document.getElementById('content-container'); // Si el primer valor es falso, verifica el segundo valor
     
-    // Renderizar el encabezado de la página
-    header.innerHTML = await Navbar.render(); // Espera hasta que la promesa se resuelva
-    await Navbar.after_render();
-    
     // Obten la URL analizada de la barra de dirrección
     let request = Utils.parseRequestURL();
 
@@ -38,10 +35,21 @@ const router = async () => { //La función siempre devuelve una promesa
     let parsedURL = (request.resource ? '/' + request.resource : '/') 
         + (request.id ? '/:id' : '') 
         + (request.verb ? '/' + request.verb : '');
-
+    
     // Obtenga la p+agina de nuestro hash de rutas compatibles
     // Si la URL analizada no está en nuestra lista de rutas admitidas, seleccione la página 404
-    let page = routes[parsedURL] ? routes[parsedURL] : Error404; 
+    let page = routes[parsedURL] ? routes[parsedURL] : Error404;
+    console.log(parsedURL !== '/' ||  parsedURL !== '/login');
+    
+    // Renderizar el encabezado de la página
+    if (parsedURL !== '/' && parsedURL !== '/login' ) {
+        console.log("hola");
+        
+        header.innerHTML = await Navbar.render(); // Espera hasta que la promesa se resuelva
+        await Navbar.after_render();
+    }
+    
+    
     content.innerHTML = await page.render();
     await page.after_render();    
 }
