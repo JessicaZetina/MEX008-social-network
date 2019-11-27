@@ -2,7 +2,6 @@ let Muro = {
     render: async () => {
         let view = /* html */ `  
 <div class="muroBox">
-    <li class="active" ><img src="../icon/FAVORITO.png"></li>
             <div class="slider">
                  <div class=slider-img>
                     <ul>

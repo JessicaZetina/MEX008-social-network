@@ -27,11 +27,13 @@ let login = {
                     <div class="alerta2" id="alertas2"></div> 
         
             </form>
+            
             <div id="contenido"></div>
-​
+            
         </div>
         </section> 
         </main>
+        
         `
         return view
     },
